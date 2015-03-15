@@ -167,6 +167,8 @@ gpu_mem=120
 force_turbo=0
 ```
 
+**NOTE:** Overclocking does has its risks, read up on it to understand. It may cause your rpi to generate more heat and shorten its lifespan. 
+
 ### Getting SNES Bomberman multiplayer working
 
 It seems like the multiplayer feature on Super Bomberman for SNES does not work when the ROM is in the `snes` folder where all my other SNES ROMs are.  When I move Bomberman to use the pisnes emulator by moving the ROM to the `snes-pisnes` folder, then multiplayer does work, but some buttons on the controller don't work. I have to use the keyboard to start or end games, which is annoying. Turns out that the pisnes controller configuration isn't inherting its controls properly, and I need to manually set the key mappings for pisnes.  
