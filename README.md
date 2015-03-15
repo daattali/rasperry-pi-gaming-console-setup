@@ -136,7 +136,7 @@ EmulationStation will tell you to press any key to configure the controller. Do 
 
 
 ### Adding games
-Press F4 to go back to the terminal.  Now run `ls RetroPie/roms`. You'll see a list of all available emulators.  If you want to play Super Mario World on SNES, then you need to download the ROM for Super Mario World and place it inside the `snes` folder.  Then when you go back to ES, you'll see your new game. But how do you get the ROM files into these folders?  There are several options:  
+Press F4 to go back to the terminal.  Now run `ls RetroPie/roms`. You'll see a list of all available emulators.  If you want to play Super Mario World on SNES, then you need to download the ROM for Super Mario World and place it inside the `snes` folder. If you have a GameBoy Colour game, the ROM goes inside the `gbc` folder.  Then when you go back to ES, you'll see your new game. But how do you get the ROM files into these folders?  There are several options:  
 
 - You can download the ROM directly from within rpi (either using `wget` or using a browser), I haven't tried it but it should work. Not my recommendation.
 - You can use Google how to transfer files using samba, but I haven't done this. Not my recommendation.
@@ -166,7 +166,31 @@ avoid_safe_mode=1
 gpu_mem=120
 force_turbo=0
 ```
- 
+
+## Getting SNES Bomberman multiplayer working
+
+It seems like the multiplayer feature on Super Bomberman for SNES does not work when the ROM is in the `snes` folder where all my other SNES ROMs are.  When I move Bomberman to use the pisnes emulator by moving the ROM to the `snes-pisnes` folder, then multiplayer does work, but some buttons on the controller don't work. I have to use the keyboard to start or end games, which is annoying. Turns out that the pisnes controller configuration isn't inherting its controls properly, and I need to manually set the key mappings for pisnes.  
+
+- Edit the pisnes config file with `sudo vim /opt/retropie/emulators/pisnes/snes9x.cfg`
+- Scroll down to the `[Joystick]` section
+- Comment out all the buttons from `A` to `SELECT`
+- Add the following button settings:
+
+```
+A_1=0
+B_1=1
+X_1=2
+Y_1=3
+L_1=4
+R_1=5
+SELECT_1=6
+START_1=7
+```
+
+Now when you go back to ES, you will see two different entries for Super Nintendo which is not ideal, but at least all games will work properly :)
+
+There may be other games that also experience similar problems, maybe they will also work better if placed under a different emulator. I know it at least works for Super Bomberman.
+
 ### Misc quick info
 - What's my rpi IP address? `hostname -I`
 - Rpi settings `sudo raspi-config`
