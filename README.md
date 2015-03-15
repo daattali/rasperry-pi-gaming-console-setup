@@ -208,4 +208,35 @@ There may be other games that also experience similar problems, maybe they will 
 
 ### Known bugs with current setup
 - Mario Kart on N64 doesn't work
-- The desktop/GUI doesn't seem to work to well
+- The desktop/GUI doesn't seem to work too well
+
+## List of ROMs I have
+
+#### Gamegear
+- Sonic the Hedgehog
+- Land of Illusion Starring Mickey Mouse
+
+#### Gameboy Colour (gbc)
+- Pokemon - Gold
+
+#### Genesis (megadrive)
+- Goldex Axe
+- Mortal Kombat 3
+- Street Fighter II - Special Champion Edition 
+
+#### SNES
+- Super Mario All Stars & World
+- Mortal Kombat
+- Super Bomberman (snes-pisnes)
+- Street Fighter II - The World Warrior
+- Aladdin
+- FIFA '98
+- NBA Jam
+- Super Mario Kart
+
+#### Playstation 1 (psx)
+- Crash Bandicoot 2
+- Norse by Norsewest
+- Tekken 3
+- Worms Armageddon
+- Crash Team Racing
