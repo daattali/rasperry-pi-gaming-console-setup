@@ -167,7 +167,7 @@ gpu_mem=120
 force_turbo=0
 ```
 
-## Getting SNES Bomberman multiplayer working
+### Getting SNES Bomberman multiplayer working
 
 It seems like the multiplayer feature on Super Bomberman for SNES does not work when the ROM is in the `snes` folder where all my other SNES ROMs are.  When I move Bomberman to use the pisnes emulator by moving the ROM to the `snes-pisnes` folder, then multiplayer does work, but some buttons on the controller don't work. I have to use the keyboard to start or end games, which is annoying. Turns out that the pisnes controller configuration isn't inherting its controls properly, and I need to manually set the key mappings for pisnes.  
 
@@ -206,6 +206,6 @@ There may be other games that also experience similar problems, maybe they will 
 - Controller settings: `/opt/retropie/emulators/retroarch/retroarch.cfg` and `/opt/retropie/configs/all/retroarch.cfg` - I'm not quite sure yet what the difference is
 - To test what each key on your controller maps to: `jstest /dev/input/js0`
 
-## Known bugs with current setup
+### Known bugs with current setup
 - Mario Kart on N64 doesn't work
 - The desktop/GUI doesn't seem to work to well
