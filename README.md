@@ -1,10 +1,10 @@
 # How to set up raspberry pi as an oldies gaming console
 
-Raspberry pis are cool. Old crappy 2D games are cool. Combine them together and you get an awesome tiny retro gaming system that supports multiple consoles and is portable, for about $50. Here's how!  Total set up time is less than an hour.
+Raspberry pis are cool. Old crappy 2D games are cool. Combine them together and you get an awesome tiny retro gaming system that supports multiple consoles and is portable, for about $50. Here's how!  Total set up time is less than an hour. I am able to run all sorts of games ranging from Super Mario World on SNES to Crash Bandicoot on PS1.
 
 *Disclaimer: I am writing this less than 24 hours after first starting to fiddle with my rasberry pi and I am not claiming that what I'm doing is necessarily the correct way to do it.  This is just what worked for me and will hopefully work for others. Another note is that you might want to perform some of the setup items in a different order, and that's fine.*
 
-## Ingredients
+### Ingredients
 - Raspberry pi 
 - Mini SD card (and SD card reader/adaptor to be able to write to it from a laptop)
 - USB controllers (I bought SNES controllers from Amazon)
@@ -129,10 +129,6 @@ This defines two htokeys: exit a game, and save/load state.
 Wn you're inside a game, there is no way to exit using the keyboard (at least none that I'm aware of), which means that you need to unplug your rpi to shut it off if you want to exit from a game. Here we defined a hotkey that will exit a game if we press buttons "6" and "7" together, which for me are the "select" and "start" buttons on the SNES controller.  Button 6 ("select") is the hotkey in this case, and button 7 is the exit button.  The other hotkey we defined is select+X (X = "2" for me, again - you can change that to anything else, or even remove that line if you don't want this).  This key combination will bring up a screen during play that allows us to save/load.
 
 
-### Edit the rpi config file
-I saw a blog post that recommended using [some extra config variables](https://github.com/dahano/retropie) if you use a SNES controller. I chose not to use them because I don't like adding parameters without knowing why, but I wantd to add it here because many people said those settings worked better for them.  If you want to use them, edit `/boot/config.txt` to what he suggests.
-
-
 ### Test run EmulationStation
 Okay that was enough setup, let's play!  RetroPie comes with a few games builtin, so let's just get a taste of what we have.  We can get to EmulationStation (the graphical user interface that lets you browse through your consoles/games) either by typing `emulationstation` in the terminal or by rebooting.  Let's reboot, just to make sure all our settings are loaded. Make sure to plug in all the controllers you have. After reboot you'll get to the welcome screen, but this time don't press F4.
 
@@ -144,7 +140,6 @@ Press F4 to go back to the terminal.  Now run `ls RetroPie/roms`. You'll see a l
 
 - You can download the ROM directly from within rpi (either using `wget` or using a browser), I haven't tried it but it should work. Not my recommendation.
 - You can use Google how to transfer files using samba, but I haven't done this. Not my recommendation.
-- Nice little trick: if you plug a USB stick into your rpi and wait a minute, rpi will automatically add all the `roms` folders onto your USB. Now you can put the USB into your laptop, place ROMs inside their correct folders on the USB stick, and when you put the USB back into your rpi, rpi will automagically copy the ROMs from the USB onto it.  This seems a little magical to me so I personally prefer the next method.
 - Use FTP. This will work assuming both your rpi and your laptop are connected to the same network. Follow these steps:
   - Download the game ROMs that you want
   - Download an FTP client such as FileZilla
@@ -153,10 +148,26 @@ Press F4 to go back to the terminal.  Now run `ls RetroPie/roms`. You'll see a l
   - Open FileZilla. In the "Host" input, type the IP address. Username is "pi" and password is "raspberry". Port is 22. Click connect.
   - Transfer your ROMs from your laptop to the appropriate folders on the rpi (each ROM should go under `/home/pi/RetroPie/roms/<emulator>`)
   - On your rpi, type `emulatorstation` and enjoy!
-  
+- **My recommendation: Nice little trick - if you plug a USB stick into your rpi and wait a minute, rpi will automatically add all the `roms` folders onto your USB. Now you can put the USB into your laptop, place ROMs inside their correct folders on the USB stick, and when you put the USB back into your rpi, rpi will automagically copy the ROMs from the USB onto it.  This seems a little magical to me so I personally prefer the next method.**
+
 Note: if you want to see a list of all emulators that ES supports, you can look inside `/etc/emulationstation/es_systems.cfg`.  You can also look there to see what file type each emulator expects for its ROMs.
  
-#### Misc quick info
+### Improving performance to be able to run newer games such as PS1
+
+I found that changing a few settings gave me very good performance with some games that otherwise were not playable.  First, I set overclocking to Turbo (`sudo raspi-config` --> Overclock --> Turbo).  Then I added a few settings to the configuration (`sudo vim /boot/config.txt`):
+
+```
+overscan_scale=1
+arm_freq=1000
+core_freq=500
+sdram_freq=600
+over_voltage=6
+avoid_safe_mode=1
+gpu_mem=120
+force_turbo=0
+```
+ 
+### Misc quick info
 - What's my rpi IP address? `hostname -I`
 - Rpi settings `sudo raspi-config`
 - Go to the GUI `startx`
@@ -169,3 +180,8 @@ Note: if you want to see a list of all emulators that ES supports, you can look 
 - What emulators are supported/what file extensions they expect for ROMs `/etc/emulationstation/es_systems.cfg`
 - RetroPie settings: `sudo ~/RetroPie-Setup/retropie_setup.sh`
 - Controller settings: `/opt/retropie/emulators/retroarch/retroarch.cfg` and `/opt/retropie/configs/all/retroarch.cfg` - I'm not quite sure yet what the difference is
+- To test what each key on your controller maps to: `jstest /dev/input/js0`
+
+## Known bugs with current setup
+- Mario Kart on N64 doesn't work
+- The desktop/GUI doesn't seem to work to well
