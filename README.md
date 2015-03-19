@@ -151,7 +151,11 @@ Press F4 to go back to the terminal.  Now run `ls RetroPie/roms`. You'll see a l
 - **My recommendation: Nice little trick - if you plug a USB stick into your rpi and wait a minute, rpi will automatically add all the `roms` folders onto your USB. Now you can put the USB into your laptop, place ROMs inside their correct folders on the USB stick, and when you put the USB back into your rpi, rpi will automagically copy the ROMs from the USB onto it.  This seems a little magical to me so I personally prefer the next method.**
 
 Note: if you want to see a list of all emulators that ES supports, you can look inside `/etc/emulationstation/es_systems.cfg`.  You can also look there to see what file type each emulator expects for its ROMs.
- 
+
+### Making PS1 games work
+
+In order to have PS1 games work, you need to add a BIOS file for PSX.  All you need to do is download the correct bios file - just Google for `scph7502.bin download`, and copy that files (`scph7502.bin`) into `/home/pi/RetroPie/BIOS/`
+
 ### Improving performance to be able to run newer games such as PS1
 
 I found that changing a few settings gave me very good performance with some games that otherwise were not playable.  First, I set overclocking to Turbo (`sudo raspi-config` --> Overclock --> Turbo).  Then I added a few settings to the configuration (`sudo vim /boot/config.txt`):
